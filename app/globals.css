@@ -1,0 +1,246 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+/* ------------------------------------------------------------------
+   Tokens. Light is warm paper with near-black ink; dark is a deep plum
+   night with soft cream type. One accent: cobalt (lightened in dark so it
+   keeps AA contrast). Every text pairing here is ≥ 4.5:1.
+   ------------------------------------------------------------------ */
+:root {
+  --bg: #f3ede2;
+  --surface: #eae2d4;
+  --ink: #1c1814;
+  --muted: #6b6157;
+  --line: rgb(28 24 20 / 0.14);
+  --accent: #1e46e0;
+  --on-accent: #f3ede2;
+  --accent-inverse: #7a9bff; /* accent on an ink background */
+  --grain-opacity: 0.06;
+  color-scheme: light;
+
+  --nav-h: 4.25rem;
+  --gutter: clamp(1rem, 3.2vw, 3rem);
+  --section-space: clamp(4rem, 2rem + 5vw, 6.5rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: #16131c;
+    --surface: #211d29;
+    --ink: #efe8dc;
+    --muted: #a69d90;
+    --line: rgb(239 232 220 / 0.14);
+    --accent: #7a9bff;
+    --on-accent: #16131c;
+    --accent-inverse: #1e46e0;
+    --grain-opacity: 0.08;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #16131c;
+  --surface: #211d29;
+  --ink: #efe8dc;
+  --muted: #a69d90;
+  --line: rgb(239 232 220 / 0.14);
+  --accent: #7a9bff;
+  --on-accent: #16131c;
+  --accent-inverse: #1e46e0;
+  --grain-opacity: 0.08;
+  color-scheme: dark;
+}
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-accent-inverse: var(--accent-inverse);
+
+  --font-display: var(--font-zodiak), ui-serif, Georgia, serif;
+  --font-sans: var(--font-general), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out: var(--ease-out);
+  --ease-in-out: var(--ease-in-out);
+}
+
+/* ------------------------------------------------------------------
+   Type scale. Display sizes stay within ~5–6× the body size so headings
+   lead without drowning the content. Fluid between 360px and 1440px.
+   ------------------------------------------------------------------ */
+@theme {
+  --text-hero: clamp(2.75rem, 1.4rem + 6.6vw, 8.25rem);
+  --text-hero--line-height: 0.95;
+  --text-section: clamp(2.25rem, 1.5rem + 3.4vw, 4.5rem);
+  --text-section--line-height: 1;
+  --text-project: clamp(2rem, 1.4rem + 2.7vw, 3.75rem);
+  --text-project--line-height: 1;
+  --text-statement: clamp(1.45rem, 1.1rem + 1.5vw, 2.4rem);
+  --text-statement--line-height: 1.3;
+  --text-lead: clamp(1.125rem, 1.05rem + 0.3vw, 1.3rem);
+  --text-lead--line-height: 1.55;
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Paper grain: one static SVG noise tile, never animated. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+section[id] {
+  scroll-margin-top: var(--nav-h);
+}
+article[id] {
+  scroll-margin-top: calc(var(--nav-h) + 1.5rem);
+}
+
+@utility display {
+  font-family: var(--font-display);
+  font-feature-settings: "kern", "liga";
+  letter-spacing: -0.025em;
+}
+
+/* Small uppercase labels */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Link with an underline that draws in from the left */
+.u-link {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0% 1px no-repeat;
+  transition: background-size 500ms var(--ease-out);
+}
+.u-link:hover,
+.u-link:focus-visible {
+  background-size: 100% 1px;
+}
+
+/* ------------------------------------------------------------------
+   Loader and intro gating. Without JS the loader never shows and nothing
+   is hidden. With JS, the head script skips the loader for the rest of the
+   session and adds safety-net classes if hydration never happens.
+   ------------------------------------------------------------------ */
+.loader {
+  display: none;
+}
+.js:not(.loader-done) .loader {
+  display: grid;
+}
+.js:not(.intro-started) [data-intro] {
+  visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js:not(.intro-started) [data-intro] {
+    visibility: visible;
+  }
+}
+html.js:not(.loader-done) {
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------------
+   Theme transition: the new theme unfolds from the top-right corner.
+   ------------------------------------------------------------------ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html.theme-fade,
+html.theme-fade *,
+html.theme-fade *::before,
+html.theme-fade *::after {
+  transition:
+    background-color 240ms ease,
+    color 240ms ease,
+    border-color 240ms ease,
+    fill 240ms ease,
+    stroke 240ms ease !important;
+}
+
+/* Variable-weight letters (hero, contact) */
+.swell {
+  display: inline-block;
+  font-variation-settings: "wght" var(--wght, 400);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Horizontal Work: the GTM steps sit in one row so the panel fits the
+   pinned viewport; on short laptop screens (e.g. 1366×768 with browser
+   chrome) the bullet lists are dropped too. */
+[data-h="on"] [data-steps] {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+@media (max-height: 760px) {
+  [data-h="on"] [data-compact-hide] {
+    display: none;
+  }
+}
+
+/* The postcard's line "writing itself" in, left to right. */
+@keyframes write {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
