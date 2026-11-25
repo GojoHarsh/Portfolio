@@ -240,3 +240,13 @@ html.theme-fade *::after {
     clip-path: inset(0 0 0 0);
   }
 }
+
+/* Custom cursor (components/ui/Cursor): hide the system pointer while it is
+   on, but keep the caret in text fields. */
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
+html.has-cursor :is(input:not([type="radio"]):not([type="checkbox"]), textarea, [contenteditable="true"]) {
+  cursor: text !important;
+}

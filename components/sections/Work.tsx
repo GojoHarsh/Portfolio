@@ -56,6 +56,7 @@ export function Work() {
 
       mm.add(HORIZONTAL, () => {
         section.dataset.h = "on";
+        track.dataset.cursor = "Scroll";
         setRide3d(canRender3D());
         const distance = () => Math.max(0, track.scrollWidth - pin.clientWidth);
         // Resting points: the scroll progress at which each panel is aligned.
@@ -157,6 +158,7 @@ export function Work() {
           redraw.current = null;
           setHorizontalResolver(null);
           section.dataset.h = "off";
+          delete track.dataset.cursor;
         };
       });
 
@@ -213,10 +215,10 @@ export function Work() {
           data-track
           className="mt-10 flex flex-col gap-20 px-[var(--gutter)] sm:mt-14 sm:gap-24 [[data-h=on]_&]:mt-4 [[data-h=on]_&]:min-h-0 [[data-h=on]_&]:w-max [[data-h=on]_&]:flex-1 [[data-h=on]_&]:flex-row [[data-h=on]_&]:gap-[6vw]"
         >
-          <EnrichmentCase project={projects[0]} />
-          <GoCartCase project={projects[1]} />
-          <EdemyCase project={projects[2]} />
-          <AdiraCase project={projects[3]} />
+          <AdiraCase project={projects[0]} />
+          <EnrichmentCase project={projects[1]} />
+          <GoCartCase project={projects[2]} />
+          <EdemyCase project={projects[3]} />
         </div>
 
         {/* Progress: a 3D bike rides a dirt trail as the panels slide by */}

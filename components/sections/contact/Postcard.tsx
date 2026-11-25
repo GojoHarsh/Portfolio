@@ -145,6 +145,7 @@ export function Postcard() {
             <div className="mt-8 flex flex-col gap-3 sm:mt-auto sm:pt-10">
               <a
                 href={mailto(topic)}
+                data-magnetic
                 className="group inline-flex h-14 w-fit items-center gap-3 rounded-full bg-ink pl-7 pr-2 text-[1.05rem] text-bg transition-colors duration-300 hover:bg-accent hover:text-on-accent"
               >
                 Write it in your mail app

@@ -24,6 +24,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   return (
     <button
       type="button"
+      data-magnetic
       onClick={toggle}
       aria-label={`Switch to ${next} theme`}
       title={`Switch to ${next} theme`}

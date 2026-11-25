@@ -24,7 +24,7 @@ function Window({ children, address }: { children: React.ReactNode; address: str
 }
 
 /**
- * Project 02: the capstone. Real screenshots of the live demo store, set
+ * Project 03: the capstone. Real screenshots of the live demo store, set
  * square to the page like devices on a desk (AdiRa's prints are fanned;
  * this one stands up straight): the storefront, a product page behind it,
  * and the same store on a phone.
@@ -48,7 +48,7 @@ export function GoCartCase({ project }: { project: Project }) {
       />
 
       <figure data-reveal-in className="flex min-h-0 flex-col justify-center [[data-h=on]_&]:h-full">
-        <div className="group relative mx-auto aspect-[1440/1000] w-full [[data-h=on]_&]:h-[calc(100%-2.5rem)] [[data-h=on]_&]:w-auto [[data-h=on]_&]:max-w-full">
+        <div className="group relative mx-auto aspect-[1440/1000] w-full [[data-h=on]_&]:h-full [[data-h=on]_&]:w-auto [[data-h=on]_&]:max-w-full">
           <div data-parallax className="absolute right-0 top-0 w-[56%] group-hover:-translate-y-2">
             <Window address="go-cart-iota-opal.vercel.app/product">
               <Image src={product} alt="GoCart product page with price, offer and add to cart" sizes="(min-width: 1024px) 28vw, 56vw" placeholder="blur" />
@@ -65,7 +65,6 @@ export function GoCartCase({ project }: { project: Project }) {
             </div>
           </div>
         </div>
-        <figcaption className="mt-4 text-[0.85rem] text-muted">Screenshots of the live demo store.</figcaption>
       </figure>
     </article>
   );

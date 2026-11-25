@@ -80,8 +80,24 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: "enrichment",
+    id: "adira",
     index: "01",
+    title: "AdiRa BioCycle",
+    kind: "Corporate website · shipped",
+    summary:
+      "A multi-page website for a circular-economy and waste-management company, taken from client requirements to a live, customer-facing site.",
+    contribution: [
+      "Designed and developed the multi-page corporate website.",
+      "Turned client requirements into the Solutions, Impact and Partnerships pages.",
+      "Built the assessment-request and contact flows.",
+      "Handled deployment on Vercel and the custom domain on Hostinger.",
+    ],
+    stack: ["Next.js", "React", "Vercel", "Hostinger"],
+    links: [{ href: "https://adirabiocycle.in/", label: "Visit adirabiocycle.in" }],
+  },
+  {
+    id: "enrichment",
+    index: "02",
     title: "Enrichment Layer",
     kind: "Professional work · BDA Technologies",
     meta: "Web Development & AI Intern · September 2026 – present",
@@ -90,15 +106,15 @@ export const projects: Project[] = [
     contribution: [
       "Imports with column mapping, a preview and resumable saves.",
       "Rule-based enrichment, and segments that explain why each person is in them.",
-      "Search, filters, saved segments and CSV export, run in PostgreSQL.",
-      "Email and WhatsApp drafts, approved before anything is sent.",
-      "Earlier: search-led lead discovery with SearXNG and Crawlee.",
+      "Personalised email and WhatsApp drafts written with OpenAI, approved before sending.",
+      "Email campaigns through Listmonk over SMTP, with opens, clicks and IMAP replies tracked.",
+      "WhatsApp integration with batch sends, daily caps and delivery status from webhooks.",
     ],
-    stack: ["Next.js", "PostgreSQL", "Prisma", "Tailwind CSS", "shadcn/ui"],
+    stack: ["Next.js", "PostgreSQL", "Prisma", "OpenAI", "Listmonk + SMTP", "IMAP", "WhatsApp (WA-AKG)"],
   },
   {
     id: "gocart",
-    index: "02",
+    index: "03",
     title: "GoCart",
     kind: "Multivendor marketplace · capstone project, SRMIST",
     summary:
@@ -117,7 +133,7 @@ export const projects: Project[] = [
   },
   {
     id: "edemy",
-    index: "03",
+    index: "04",
     title: "Edemy",
     kind: "Learning platform · full-stack personal project",
     summary:
@@ -130,22 +146,6 @@ export const projects: Project[] = [
     ],
     stack: ["MongoDB", "Express.js", "React", "Node.js", "Stripe", "Cloudinary"],
     links: [{ href: "https://github.com/GojoHarsh/Edemy", label: "Code on GitHub" }],
-  },
-  {
-    id: "adira",
-    index: "04",
-    title: "AdiRa BioCycle",
-    kind: "Corporate website · shipped",
-    summary:
-      "A multi-page website for a circular-economy and waste-management company, taken from client requirements to a live, customer-facing site.",
-    contribution: [
-      "Designed and developed the multi-page corporate website.",
-      "Turned client requirements into the Solutions, Impact and Partnerships pages.",
-      "Built the assessment-request and contact flows.",
-      "Handled deployment on Vercel and the custom domain on Hostinger.",
-    ],
-    stack: ["Next.js", "React", "Vercel", "Hostinger"],
-    links: [{ href: "https://adirabiocycle.in/", label: "Visit adirabiocycle.in" }],
   },
 ];
 

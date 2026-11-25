@@ -9,7 +9,7 @@ import insights from "@/public/work/enrichment-insights.png";
 const CARD = "overflow-hidden rounded-[14px] border border-line bg-bg shadow-[0_28px_60px_-28px_rgb(0_0_0/0.5)] transition-transform duration-700 ease-out";
 
 /**
- * Project 01: professional work. Real screens of the Enrichment Layer, taken
+ * Project 02: professional work. Real screens of the Enrichment Layer, taken
  * from a local copy running on the sample spreadsheet (dummy people only):
  * the users table as the window, with the segment rules and the insights
  * lifted out of it, since those are the parts that make it more than a list.
@@ -34,7 +34,7 @@ export function EnrichmentCase({ project }: { project: Project }) {
       />
 
       <figure data-reveal-in className="flex min-h-0 flex-col justify-center [[data-h=on]_&]:h-full">
-        <div className="group relative mx-auto aspect-[1440/1000] w-full [[data-h=on]_&]:h-[calc(100%-2.5rem)] [[data-h=on]_&]:w-auto [[data-h=on]_&]:max-w-full">
+        <div className="group relative mx-auto aspect-[1440/1000] w-full [[data-h=on]_&]:h-full [[data-h=on]_&]:w-auto [[data-h=on]_&]:max-w-full">
           {/* The app: the users table, everyone searchable and filterable */}
           <div className={`${CARD} absolute left-[5%] top-[12%] w-[80%] group-hover:-translate-y-1`}>
             <Image src={users} alt="Enrichment Layer users table with filters and segments, on sample data" sizes="(min-width: 1024px) 40vw, 80vw" placeholder="blur" />
@@ -52,9 +52,6 @@ export function EnrichmentCase({ project }: { project: Project }) {
             </div>
           </div>
         </div>
-        <figcaption className="mt-4 text-[0.85rem] text-muted">
-          Screens from a local copy running on sample data. No real users, integrations or endpoints are shown.
-        </figcaption>
       </figure>
     </article>
   );

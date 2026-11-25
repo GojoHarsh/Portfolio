@@ -51,6 +51,7 @@ export function ProjectText({
             <a
               key={link.href}
               href={link.href}
+              data-cursor="Open ↗"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex w-fit items-center gap-2 font-medium"

@@ -32,7 +32,7 @@ export function AdiraCase({ project }: { project: Project }) {
       />
 
       <figure data-reveal-in className="flex min-h-0 flex-col justify-center px-[4%] [[data-h=on]_&]:h-full [[data-h=on]_&]:px-0">
-        <div className="group relative mx-auto aspect-[1440/1000] w-full [[data-h=on]_&]:h-[calc(100%-2.5rem)] [[data-h=on]_&]:max-w-full [[data-h=on]_&]:w-auto">
+        <div className="group relative mx-auto aspect-[1440/1000] w-full [[data-h=on]_&]:h-full [[data-h=on]_&]:max-w-full [[data-h=on]_&]:w-auto">
           <div data-parallax className="absolute right-0 top-0 w-[56%]">
             <div className={`${PRINT} rotate-[3deg] group-hover:translate-x-3 group-hover:rotate-[6deg]`}>
               <Image src={impact} alt="AdiRa BioCycle Impact page" sizes="(min-width: 1024px) 30vw, 56vw" placeholder="blur" />
@@ -54,9 +54,6 @@ export function AdiraCase({ project }: { project: Project }) {
             </div>
           </div>
         </div>
-        <figcaption className="mt-4 text-[0.85rem] text-muted">
-          Screenshots of the live site. Its figures are the client&apos;s own.
-        </figcaption>
       </figure>
     </article>
   );

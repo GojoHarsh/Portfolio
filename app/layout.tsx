@@ -6,6 +6,7 @@ import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { SiteNav } from "@/components/layout/SiteNav";
 import { Loader } from "@/components/loader/Loader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { Cursor } from "@/components/ui/Cursor";
 import { person } from "@/content/portfolio";
 import "./globals.css";
 
@@ -89,6 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {children}
             </main>
             <SiteFooter />
+            <Cursor />
           </SmoothScroll>
         </ThemeProvider>
       </body>

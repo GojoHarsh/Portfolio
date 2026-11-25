@@ -8,17 +8,18 @@ import { nav, person } from "@/content/portfolio";
 
 /**
  * Fixed top navigation. Transparent over the hero; once you scroll it gains
- * the page colour, and its bottom edge becomes the route: a line that fills
- * as you read, with a stop for each section. Desktop shows the links inline;
+ * the page colour, and its bottom edge becomes the route: one even segment
+ * per section, each filling as that section is read (so the long, pinned
+ * Work section doesn't squash the others). Desktop shows the links inline;
  * small screens get a full-screen <dialog> menu (native focus trap, Esc
  * closes). Plain anchors underneath, so it works without JS.
  */
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string | null>(null);
-  const [stops, setStops] = useState<{ id: string; at: number }[]>([]);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const routeRef = useRef<HTMLDivElement>(null);
+  const tops = useRef<number[]>([]);
   const { scrollTo, stop, start } = useSmoothScroll();
 
   useEffect(() => {
@@ -31,28 +32,29 @@ export function SiteNav() {
       let current: string | null = null;
       for (const s of sections) if (s.getBoundingClientRect().top <= mid) current = s.id;
       setActive(current);
-      // The route: how far down the page, and which stops are behind us.
+      // The route: how much of each section has been read, measured at
+      // the middle of the viewport, like the active link.
       const route = routeRef.current;
-      if (route) {
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = max > 0 ? Math.min(1, window.scrollY / max) : 0;
-        route.style.setProperty("--route", progress.toFixed(4));
-        route.querySelectorAll<HTMLElement>("[data-at]").forEach((dot) => {
-          dot.dataset.passed = String(progress >= Number(dot.dataset.at) - 0.001);
+      if (route && tops.current.length) {
+        const at = window.scrollY + mid;
+        route.querySelectorAll<HTMLElement>("[data-segment]").forEach((seg, i) => {
+          const from = tops.current[i];
+          const to = tops.current[i + 1];
+          seg.style.setProperty("--fill", Math.min(1, Math.max(0, (at - from) / Math.max(1, to - from))).toFixed(4));
         });
       }
     };
-    // Where each section starts along the page; re-measured whenever the
-    // page changes height (fonts, images, the pinned Work section).
+    // Where each section starts (and where the last one ends); re-measured
+    // whenever the page changes height (fonts, images, the pinned Work section).
     const measure = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      setStops(
-        nav.map((item) => {
+      const doc = document.documentElement;
+      tops.current = [
+        ...nav.map((item) => {
           const el = document.getElementById(item.id);
-          const top = el ? el.getBoundingClientRect().top + window.scrollY : 0;
-          return { id: item.id, at: max > 0 ? Math.min(1, top / max) : 0 };
+          return el ? el.getBoundingClientRect().top + window.scrollY : 0;
         }),
-      );
+        doc.scrollHeight - window.innerHeight / 2,
+      ];
       onScroll();
     };
     measure();
@@ -84,16 +86,12 @@ export function SiteNav() {
       <div
         ref={routeRef}
         aria-hidden="true"
-        className={`pointer-events-none absolute inset-x-0 -bottom-px h-px transition-opacity duration-500 ${scrolled ? "opacity-100" : "opacity-0"}`}
+        className={`pointer-events-none absolute inset-x-0 -bottom-px flex h-[2px] gap-1 px-[var(--gutter)] transition-opacity duration-500 ${scrolled ? "opacity-100" : "opacity-0"}`}
       >
-        <div className="absolute inset-0 origin-left scale-x-[var(--route,0)] bg-accent" />
-        {stops.map((s) => (
-          <span
-            key={s.id}
-            data-at={s.at}
-            style={{ left: `${(s.at * 100).toFixed(2)}%` }}
-            className="absolute top-1/2 size-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-muted/50 bg-bg transition-colors duration-300 data-[passed=true]:border-accent data-[passed=true]:bg-accent"
-          />
+        {nav.map((item) => (
+          <span key={item.id} data-segment className="relative h-full flex-1 overflow-hidden rounded-full bg-line">
+            <span className="absolute inset-0 origin-left scale-x-[var(--fill,0)] rounded-full bg-accent" />
+          </span>
         ))}
       </div>
 
@@ -129,6 +127,7 @@ export function SiteNav() {
           {/* The one action that matters, always in reach on desktop */}
           <a
             href="#contact"
+            data-magnetic
             onClick={(e) => go(e, "contact")}
             aria-current={active === "contact" ? "true" : undefined}
             className="hidden h-11 items-center rounded-full bg-ink px-5 text-[0.95rem] text-bg transition-colors duration-300 hover:bg-accent hover:text-on-accent md:inline-flex"

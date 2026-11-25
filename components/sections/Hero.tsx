@@ -126,6 +126,7 @@ export function Hero() {
               <a
                 data-cta
                 data-intro
+                data-magnetic
                 href="#work"
                 onClick={(e) => jump(e, "#work")}
                 className="group inline-flex h-12 items-center gap-3 rounded-full bg-ink pl-6 pr-2 text-bg transition-colors duration-300 hover:bg-accent hover:text-on-accent"
