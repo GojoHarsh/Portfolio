@@ -186,9 +186,16 @@ export function SiteNav() {
             <a href={`mailto:${person.email}`} className="u-link w-fit">
               {person.email}
             </a>
-            <a href={person.linkedin} target="_blank" rel="noopener noreferrer" className="u-link w-fit text-muted">
-              LinkedIn ↗<span className="sr-only"> (opens in a new tab)</span>
-            </a>
+            <p className="flex gap-5 text-muted">
+              <a href={person.linkedin} target="_blank" rel="noopener noreferrer" className="u-link w-fit">
+                LinkedIn ↗<span className="sr-only"> (opens in a new tab)</span>
+              </a>
+              {person.github ? (
+                <a href={person.github} target="_blank" rel="noopener noreferrer" className="u-link w-fit">
+                  GitHub ↗<span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              ) : null}
+            </p>
           </div>
         </div>
       </dialog>

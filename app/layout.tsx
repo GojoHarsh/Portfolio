@@ -58,7 +58,7 @@ const personJsonLd = {
   knowsAbout: ["JavaScript", "React", "Next.js", "Node.js", "Express.js", "MongoDB", "REST APIs", "Stripe"],
   address: { "@type": "PostalAddress", addressLocality: "Patna", addressCountry: "IN" },
   email: `mailto:${person.email}`,
-  sameAs: [person.linkedin],
+  sameAs: [person.linkedin, ...(person.github ? [person.github] : [])],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

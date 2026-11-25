@@ -45,20 +45,24 @@ export function ProjectText({
         <span className="sr-only">Built with: </span>
         {project.stack.join("  ·  ")}
       </p>
-      {project.link ? (
-        <a
-          data-reveal-in
-          href={project.link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group inline-flex w-fit items-center gap-2 font-medium"
-        >
-          <span className="u-link">Visit {project.link.label}</span>
-          <span aria-hidden="true" className="transition-transform duration-500 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
-            ↗
-          </span>
-          <span className="sr-only">(opens in a new tab)</span>
-        </a>
+      {project.links?.length ? (
+        <p data-reveal-in className="flex flex-wrap gap-x-6 gap-y-2">
+          {project.links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex w-fit items-center gap-2 font-medium"
+            >
+              <span className="u-link">{link.label}</span>
+              <span aria-hidden="true" className="transition-transform duration-500 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                ↗
+              </span>
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+          ))}
+        </p>
       ) : null}
     </div>
   );

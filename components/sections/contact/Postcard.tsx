@@ -192,18 +192,21 @@ export function Postcard() {
                 </dd>
               </div>
             </dl>
-            <a
-              href={person.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group mt-6 inline-flex items-center gap-2 text-[1rem]"
-            >
-              <span className="u-link">Or find me on LinkedIn</span>
-              <span aria-hidden="true" className="transition-transform duration-500 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
-                ↗
-              </span>
-              <span className="sr-only">(opens in a new tab)</span>
-            </a>
+            <p className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-[1rem]">
+              <span className="text-muted">Or find me on</span>
+              {[
+                { href: person.linkedin, label: "LinkedIn" },
+                ...(person.github ? [{ href: person.github, label: "GitHub" }] : []),
+              ].map((link) => (
+                <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-1.5">
+                  <span className="u-link">{link.label}</span>
+                  <span aria-hidden="true" className="transition-transform duration-500 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                    ↗
+                  </span>
+                  <span className="sr-only">(opens in a new tab)</span>
+                </a>
+              ))}
+            </p>
           </div>
         </div>
       </div>

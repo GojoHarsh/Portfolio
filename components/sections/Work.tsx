@@ -12,7 +12,8 @@ import { canRender3D } from "@/lib/webgl";
 import { useSmoothScroll } from "@/components/layout/SmoothScroll";
 import { AdiraCase } from "./work/AdiraCase";
 import { EdemyCase } from "./work/EdemyCase";
-import { GtmCase } from "./work/GtmCase";
+import { EnrichmentCase } from "./work/EnrichmentCase";
+import { GoCartCase } from "./work/GoCartCase";
 
 // The 3D ride (three.js + React Three Fiber) loads only when it will be shown.
 const TrailRide = dynamic(() => import("@/components/three/TrailRide"), { ssr: false });
@@ -212,9 +213,10 @@ export function Work() {
           data-track
           className="mt-10 flex flex-col gap-20 px-[var(--gutter)] sm:mt-14 sm:gap-24 [[data-h=on]_&]:mt-4 [[data-h=on]_&]:min-h-0 [[data-h=on]_&]:w-max [[data-h=on]_&]:flex-1 [[data-h=on]_&]:flex-row [[data-h=on]_&]:gap-[6vw]"
         >
-          <AdiraCase project={projects[0]} />
-          <EdemyCase project={projects[1]} />
-          <GtmCase project={projects[2]} />
+          <EnrichmentCase project={projects[0]} />
+          <GoCartCase project={projects[1]} />
+          <EdemyCase project={projects[2]} />
+          <AdiraCase project={projects[3]} />
         </div>
 
         {/* Progress: a 3D bike rides a dirt trail as the panels slide by */}

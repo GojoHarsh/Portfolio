@@ -223,13 +223,9 @@ html.theme-fade *::after {
   }
 }
 
-/* Horizontal Work: the GTM steps sit in one row so the panel fits the
-   pinned viewport; on short laptop screens (e.g. 1366×768 with browser
-   chrome) the bullet lists are dropped too. */
-[data-h="on"] [data-steps] {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-@media (max-height: 760px) {
+/* Horizontal Work: on short laptop screens (e.g. 1366×768 with browser
+   chrome) the project bullet lists are dropped so each panel fits. */
+@media (max-height: 800px) {
   [data-h="on"] [data-compact-hide] {
     display: none;
   }

@@ -8,8 +8,8 @@ export const person = {
   roles: ["MCA Student", "Web Development & AI Intern"],
   email: "harsh82525@gmail.com",
   linkedin: "https://www.linkedin.com/in/harsh-kumar-0b94292a3/",
-  // GitHub is shown only once a verified profile URL is added here.
-  github: null as string | null,
+  // Verified: the profile Harsh pushes this site to.
+  github: "https://github.com/GojoHarsh" as string | null,
 };
 
 export const hero = {
@@ -27,7 +27,7 @@ export const hero = {
  */
 export const story = {
   bring: "Tyres pumped. Here’s what I bring along.",
-  work: "Three stops on the route so far.",
+  work: "Four stops on the route so far.",
   about: "So, who’s riding?",
   play: "Your turn to ride.",
   // The contact section opens with contact.kicker.
@@ -56,7 +56,7 @@ export const strengths = {
     {
       title: { plain: "AI-driven features,", em: "in a team" },
       text: "I work in sprints with a cross-functional team, turning product requirements into shipped features for an AI-driven product.",
-      proof: { href: "#project-gtm", label: "See the GTM work" },
+      proof: { href: "#project-enrichment", label: "See the Enrichment Layer" },
     },
     {
       title: { plain: "Quick to learn,", em: "glad to teach" },
@@ -75,29 +75,49 @@ export type Project = {
   contribution: string[];
   stack: string[];
   meta?: string;
-  link?: { href: string; label: string };
+  links?: { href: string; label: string }[];
 };
 
 export const projects: Project[] = [
   {
-    id: "adira",
+    id: "enrichment",
     index: "01",
-    title: "AdiRa BioCycle",
-    kind: "Corporate website · shipped",
+    title: "Enrichment Layer",
+    kind: "Professional work · BDA Technologies",
+    meta: "Web Development & AI Intern · September 2026 – present",
     summary:
-      "A multi-page website for a circular-economy and waste-management company, taken from client requirements to a live, customer-facing site.",
+      "The layer of BDA Technologies' GTM product that turns sign-up spreadsheets into one clean user database and prepares outreach a person approves. I built this layer; the wider product is a team effort.",
     contribution: [
-      "Designed and developed the multi-page corporate website.",
-      "Turned client requirements into the Solutions, Impact and Partnerships pages.",
-      "Built the assessment-request and contact flows.",
-      "Handled deployment on Vercel and the custom domain on Hostinger.",
+      "Imports with column mapping, a preview and resumable saves.",
+      "Rule-based enrichment, and segments that explain why each person is in them.",
+      "Search, filters, saved segments and CSV export, run in PostgreSQL.",
+      "Email and WhatsApp drafts, approved before anything is sent.",
+      "Earlier: search-led lead discovery with SearXNG and Crawlee.",
     ],
-    stack: ["Next.js", "React", "Vercel", "Hostinger"],
-    link: { href: "https://adirabiocycle.in/", label: "adirabiocycle.in" },
+    stack: ["Next.js", "PostgreSQL", "Prisma", "Tailwind CSS", "shadcn/ui"],
+  },
+  {
+    id: "gocart",
+    index: "02",
+    title: "GoCart",
+    kind: "Multivendor marketplace · capstone project, SRMIST",
+    summary:
+      "A marketplace where sellers open their own stores and list products, shoppers browse and pay, and an admin approves stores and manages coupons.",
+    contribution: [
+      "Seller stores with their own products, stock and orders; new stores wait for admin approval.",
+      "AI product listings: upload a photo and a vision model drafts the name and description.",
+      "Stripe checkout, Clerk sign-in with roles, and product images on ImageKit.",
+      "Background jobs with Inngest: expiring coupons and keeping users in sync with Clerk.",
+    ],
+    stack: ["Next.js", "Prisma", "Neon PostgreSQL", "Clerk", "Stripe", "ImageKit", "Inngest"],
+    links: [
+      { href: "https://go-cart-iota-opal.vercel.app/", label: "Live demo" },
+      { href: "https://github.com/GojoHarsh/GoCart", label: "Code on GitHub" },
+    ],
   },
   {
     id: "edemy",
-    index: "02",
+    index: "03",
     title: "Edemy",
     kind: "Learning platform · full-stack personal project",
     summary:
@@ -109,22 +129,23 @@ export const projects: Project[] = [
       "Payments through Stripe; course media stored on Cloudinary.",
     ],
     stack: ["MongoDB", "Express.js", "React", "Node.js", "Stripe", "Cloudinary"],
+    links: [{ href: "https://github.com/GojoHarsh/Edemy", label: "Code on GitHub" }],
   },
   {
-    id: "gtm",
-    index: "03",
-    title: "GTM Lead Capture Engine",
-    kind: "Professional work · BDA Technologies",
-    meta: "Web Development & AI Intern · September 2026 – present",
+    id: "adira",
+    index: "04",
+    title: "AdiRa BioCycle",
+    kind: "Corporate website · shipped",
     summary:
-      "I contribute to the lead-capture and prospect-discovery workflow of the company's GTM product. I didn't build the product alone; this is the part of it I work on.",
+      "A multi-page website for a circular-economy and waste-management company, taken from client requirements to a live, customer-facing site.",
     contribution: [
-      "Search-led website discovery with SearXNG.",
-      "Website crawling with Crawlee.",
-      "Extracting company information into structured data.",
-      "Working within the team's prospect-discovery workflow.",
+      "Designed and developed the multi-page corporate website.",
+      "Turned client requirements into the Solutions, Impact and Partnerships pages.",
+      "Built the assessment-request and contact flows.",
+      "Handled deployment on Vercel and the custom domain on Hostinger.",
     ],
-    stack: ["JavaScript", "SearXNG", "Crawlee"],
+    stack: ["Next.js", "React", "Vercel", "Hostinger"],
+    links: [{ href: "https://adirabiocycle.in/", label: "Visit adirabiocycle.in" }],
   },
 ];
 
@@ -151,7 +172,7 @@ export const toolbox: { lead: string; tools: string[]; tail?: string }[] = [
   { lead: "Data lives in", tools: ["MongoDB", "PostgreSQL"] },
   {
     lead: "And along the way:",
-    tools: ["Git/GitHub", "Crawlee", "SearXNG", "Stripe", "Cloudinary", "Vercel", "Hostinger"],
+    tools: ["Git/GitHub", "Prisma", "Crawlee", "SearXNG", "Stripe", "Cloudinary", "Vercel", "Hostinger"],
   },
 ];
 
